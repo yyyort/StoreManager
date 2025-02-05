@@ -1,0 +1,41 @@
+services:
+  server:
+    profiles: [Production]
+    container_name: storemanger_backend
+    build:
+      context: ./server
+    ports:
+      - "5294:5294"
+    expose:
+      - "5294"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=storemanger_db;Port=${DB_PORT:?};Database=${POSTGRES_DB:?};Username=${POSTGRES_USER:?};Password=${POSTGRES_PASSWORD:?}
+  db:
+    container_name: storemanger_db
+    image: postgres
+    restart: always
+    ports:
+      - ${DB_PORT:?}:${DB_PORT:?}
+    expose:
+      - ${DB_PORT:?}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:?}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?}
+      - POSTGRES_DB=${POSTGRES_DB:?}
+    volumes:
+      - storemanger-db:/var/lib/postgresql/data
+    command: ["postgres", "-p", "${DB_PORT:?}"]
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:?} -d ${POSTGRES_DB:?} -p 5434",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+    storemanger-db:

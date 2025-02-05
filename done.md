@@ -9,3 +9,5 @@ dotnet dev-certs https --trust
 
 // init gitignore
 dotnet new gitignore
+
+// added dockerfile and dockercompose
