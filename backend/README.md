@@ -62,7 +62,8 @@ backend/
 
 3. **Access the API**:
    - Base URL: `http://localhost:5007`
-   - OpenAPI/Swagger: `http://localhost:5007/swagger` (in development)
+   - Swagger UI: `http://localhost:5007/swagger` (in development)
+   - API Documentation: `http://localhost:5007/swagger/v1/swagger.json`
 
 ## 📚 API Endpoints
 
