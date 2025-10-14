@@ -5,7 +5,7 @@ asp.net core controller api
 mssql db
 azure deployment
 
-frontend
+frontend monorepo
     web - nextjs
     mobile - react native
     
