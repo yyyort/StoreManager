@@ -38,7 +38,7 @@ namespace backend.Services
             return _mapper.Map<UserResponseDto>(user);
         }
 
-        public async Task<UserResponseDto?> GetUserByIdAsync(int id)
+        public async Task<UserResponseDto?> GetUserByIdAsync(Guid id)
         {
             var user = await _context.Users.FindAsync(id);
             return user == null ? null : _mapper.Map<UserResponseDto>(user);

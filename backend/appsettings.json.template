@@ -8,5 +8,11 @@
       "Microsoft.AspNetCore": "Warning"
     }
   },
-  "AllowedHosts": "*"
+  "AllowedHosts": "*",
+  "Jwt": {
+    "Key": "REPLACE_WITH_SECURE_KEY_FROM_USER_SECRETS_OR_ENV_VAR",
+    "Issuer": "StoreManagerAPI",
+    "Audience": "StoreManagerClient",
+    "ExpirationDays": "7"
+  }
 }

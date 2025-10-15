@@ -1,0 +1,43 @@
+### Variables
+@baseUrl = http://localhost:5007/api
+@token = 
+
+### Register a new user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "avatar": "https://example.com/avatar.jpg"
+}
+
+### Login
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+
+### Extract token from login response
+@authToken = {{login.response.body.data.token}}
+
+### Get current user (requires authentication)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{authToken}}
+
+### Get all users
+GET {{baseUrl}}/users
+Authorization: Bearer {{authToken}}
+
+### Get user by ID (replace with actual GUID)
+GET {{baseUrl}}/users/00000000-0000-0000-0000-000000000000
+Authorization: Bearer {{authToken}}
+
+### Get user by email
+GET {{baseUrl}}/users/by-email/john.doe@example.com
+Authorization: Bearer {{authToken}}

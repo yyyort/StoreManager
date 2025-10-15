@@ -57,7 +57,7 @@ namespace backend.Controllers
         /// <param name="id">User ID</param>
         /// <returns>User information</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserResponseDto>> GetUser(int id)
+        public async Task<ActionResult<UserResponseDto>> GetUser(Guid id)
         {
             try
             {
