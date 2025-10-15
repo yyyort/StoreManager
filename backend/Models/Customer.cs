@@ -3,23 +3,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Models
 {
-    public class User
+    public class Customer
     {
         [Key]
         public Guid Id { get; set; }
 
         [Required]
+        public Guid UserId { get; set; }
+
+        [Required]
+        public Guid StoreId { get; set; }
+
+        [Required]
         [StringLength(255)]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(255)]
-        [EmailAddress]
-        public string Email { get; set; } = string.Empty;
-
-        [Required]
-        [StringLength(255)]
-        public string Password { get; set; } = string.Empty;
+        [StringLength(500)]
+        public string? Address { get; set; }
 
         [StringLength(500)]
         public string? Avatar { get; set; }
@@ -29,9 +29,13 @@ namespace backend.Models
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation properties
-        public virtual ICollection<Store> Stores { get; set; } = new List<Store>();
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; } = null!;
+
+        [ForeignKey("StoreId")]
+        public virtual Store Store { get; set; } = null!;
+
         public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
-        public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
+        public virtual ICollection<Expense> Expenses { get; set; } = new List<Expense>();
     }
 }
